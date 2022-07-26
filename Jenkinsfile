@@ -44,13 +44,12 @@ pipeline {
             } 
             steps{  
                 script {
-						wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
 							withCredentials([
 								[ $class: 'AmazonWebServicesCredentialsBinding',
 									accessKeyVariable: 'AWS_ACCESS_KEY_ID',
 									secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
 									credentialsId: 'aws_credential',
-									]])}
+									]])
 				
 			cd $Env:WORKSPACE
 			sh 'terraform plan -var-file=terraform.tfvars'
