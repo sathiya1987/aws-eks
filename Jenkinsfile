@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Deploy'){
             when { anyOf{
-              environment name: 'ACTION', value: 'apply';
+              environment name: 'ACTION', value: 'apply'
             }
                
             }
