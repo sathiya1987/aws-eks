@@ -53,7 +53,7 @@ pipeline {
 				
 				dir('eks') {
                 sh "pwd"
-	       sh 'terraform plan -var-file=terraform.tfvars'
+	       sh 'terraform plan -var-file=terraform.tfvars -out=tfplan'
     }  
 			
 				}	
@@ -61,13 +61,30 @@ pipeline {
         }
         }
         stage('Deploy'){
-            when { expression{
-               params.Deployment == "apply"
+            when { anyOf{
+              environment name: 'ACTION', value: 'apply';
             }
                
             }
             steps{
-                sh 'terraform apply --auto-approve -var-file=terraform.tfvars '
+		    
+		 script {
+				withCredentials([
+								[ $class: 'AmazonWebServicesCredentialsBinding',
+									accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+									secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+									credentialsId: 'e82ebe19-e54f-43dd-8af6-ce4d8199eaa1',
+								]]){
+				
+		dir('eks') {
+                sh "pwd"
+	       sh 'terraform apply  -var-file=terraform.tfvars '
+    }  
+			
+				}	
+            }   
+		    
+                
             }
         }
     }
