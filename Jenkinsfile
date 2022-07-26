@@ -1,5 +1,16 @@
 pipeline {
    agent {label "slave"}
+	
+	environment {
+		ACTION = "${params.Deployment}"
+  }
+	options {
+        buildDiscarder(logRotator(numToKeepStr: '30'))
+        timestamps()
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+  }
+	
    parameters {
         choice(name: 'Environment', choices: ['Dev', 'QAS', 'Prod'], description: 'Select the environment')
         choice(name: 'Deployment', choices: ['plan', 'apply', 'destroy'], description: 'Select the type of deployment')
@@ -26,9 +37,9 @@ pipeline {
             }
         }
         stage('Build'){
-            when { expression{
-               params.Deployment == "plan"
-               params.Deployment == "apply"
+            when { anyOf{
+                                                environment name: 'ACTION', value: 'plan';
+						environment name: 'ACTION', value: 'apply'
             }
             } 
             steps{  
