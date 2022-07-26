@@ -48,7 +48,7 @@ pipeline {
 								[ $class: 'AmazonWebServicesCredentialsBinding',
 									accessKeyVariable: 'AWS_ACCESS_KEY_ID',
 									secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-									credentialsId: 'aws_credential',
+									credentialsId: 'e82ebe19-e54f-43dd-8af6-ce4d8199eaa1',
 								]]){
 				
 			cd $Env:WORKSPACE
