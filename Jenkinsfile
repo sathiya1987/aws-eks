@@ -17,7 +17,7 @@ pipeline {
         stage('validate'){
             steps{
  
-		dir('.') {
+		dir('.eks') {
                 sh "pwd"
 	        sh 'terraform init'
                 sh 'terraform validate'		
