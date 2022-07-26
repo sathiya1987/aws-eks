@@ -16,9 +16,13 @@ pipeline {
         } 
         stage('validate'){
             steps{
-                sh 'cd .eks/'
-                sh 'terraform init'
-                sh 'terraform validate'
+ 
+		dir('your-sub-directory') {
+                sh "pwd"
+	        sh 'terraform init'
+                sh 'terraform validate'		
+    }    
+                
             }
         }
         stage('Build'){
