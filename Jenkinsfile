@@ -19,7 +19,7 @@ pipeline {
         
     }
    stages {
-        stage('Checkout') {
+        stage('SCM') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github-jenkins', url: 'https://github.com/sathiya1987/aws-eks.git']]])
                 sh "ls -lart ./*"
