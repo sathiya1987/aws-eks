@@ -31,8 +31,7 @@ pipeline {
                params.Deployment == "apply"
             }
             } 
-            steps{
-		dir('eks'){    
+            steps{  
                 script {
 						wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
 							withCredentials([
@@ -42,8 +41,9 @@ pipeline {
 									credentialsId: 'aws_credential',
 									]])}
 				
+			cd $Env:WORKSPACE
 			sh 'terraform plan -var-file=terraform.tfvars'
-			}	
+				
             }
         }
         }
