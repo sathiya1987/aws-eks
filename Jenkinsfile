@@ -5,7 +5,7 @@ pipeline {
         choice(name: 'Deployment', choices: ['plan', 'apply', 'destroy'], description: 'Select the type of deployment')
         choice(name: 'Region', choices: ['us-east-1', 'us-east-2'], description: 'Select the region')
         choice(name: 'Colour', choices: ['Blue', 'Green'], description: 'Select the colour')
-        string(name: 'PARAMETERS_FILE_NAME', defaultValue: 'example-parameters.properties', description: 'Enter the Parameters File Name (Must contain file extension type *.properties)')
+        
     }
    stages {
         stage('Checkout') {
