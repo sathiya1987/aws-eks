@@ -40,7 +40,10 @@ pipeline {
 									secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
 									credentialsId: 'aws_credential',
 									]])}
-                sh 'terraform plan -var-file=terraform.tfvars'
+			dir('eks'){
+				
+			sh 'terraform plan -var-file=terraform.tfvars'
+			}	
             }
         }
         }
