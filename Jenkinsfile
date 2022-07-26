@@ -16,7 +16,7 @@ pipeline {
         } 
         stage('validate'){
             steps{
-                
+                sh 'cd .eks/'
                 sh 'terraform init'
                 sh 'terraform validate'
             }
