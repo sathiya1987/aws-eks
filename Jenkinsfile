@@ -32,6 +32,7 @@ pipeline {
             }
             } 
             steps{
+		dir('eks'){    
                 script {
 						wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
 							withCredentials([
@@ -40,7 +41,6 @@ pipeline {
 									secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
 									credentialsId: 'aws_credential',
 									]])}
-			dir('eks'){
 				
 			sh 'terraform plan -var-file=terraform.tfvars'
 			}	
