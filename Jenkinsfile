@@ -27,7 +27,6 @@ pipeline {
                params.Deployment == "apply"
             }
             } 
-            }
             steps{
                 script {
 						wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
@@ -40,9 +39,10 @@ pipeline {
                 sh 'terraform plan -var-file=terraform.tfvars'
             }
         }
+        }
         stage('Deploy'){
-            when { anyOf{
-               ${params.Deployment} == "apply"
+            when { expression{
+               params.Deployment == "apply"
             }
                
             }
