@@ -17,7 +17,7 @@ pipeline {
         stage('validate'){
             steps{
  
-		dir('your-sub-directory') {
+		dir('.') {
                 sh "pwd"
 	        sh 'terraform init'
                 sh 'terraform validate'		
