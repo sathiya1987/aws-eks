@@ -51,7 +51,7 @@ pipeline {
 									credentialsId: 'e82ebe19-e54f-43dd-8af6-ce4d8199eaa1',
 								]]){
 				
-			cd $Env:WORKSPACE
+			sh 'cd $Env:WORKSPACE'
 			sh 'terraform plan -var-file=terraform.tfvars'
 				}	
             }
